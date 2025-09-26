@@ -1,12 +1,15 @@
 Meteoros Task Management API
 Spring Boot REST API for task management with JWT authentication, rate limiting, and MySQL database.
-GitHub Repository: https://github.com/chandrasekhar-cherukuru/meteoros-task-management-api
+GitHub Repository: meteoros-task-management-api
 How to Run the Service Locally
 Prerequisites
 Java 21+
 MySQL 8.0+
 Maven 3.8+
 Installing Dependencies and Starting Server on Port 9876
+First clone the repository
+Second install dependencies
+Third setup database
 git clone https://github.com/chandrasekhar-cherukuru/meteoros-task-management-api.git
 cd meteoros-task-management-api
 mvn clean install
@@ -20,7 +23,7 @@ CREATE USER 'meteoros_user'@'localhost' IDENTIFIED BY 'meteoros_password';
 GRANT ALL PRIVILEGES ON meteoros_task_db.* TO 'meteoros_user'@'localhost';
 FLUSH PRIVILEGES;
 Environment Variable Names and Sample .env Template
-Create a .env file in project root with these variables:
+Create a .env file in project root:
 DB_URL=jdbc:mysql://localhost:3306/meteoros_task_db
 DB_USERNAME=meteoros_user
 DB_PASSWORD=meteoros_password
@@ -133,14 +136,13 @@ Expected Response:
 "updatedAt": "2025-09-26T20:50:00"
 }
 ]
-
 API Features
-✅ JWT Authentication with secure password hashing
-✅ Rate Limiting (10 requests/min authenticated, 3 requests/min unauthenticated)
-✅ Complete CRUD operations for task management
-✅ Input validation with custom error handling
-✅ User-specific task isolation for security
-✅ MySQL database integration with JPA/Hibernate
+JWT Authentication with secure password hashing
+Rate Limiting (10 requests/min authenticated, 3 requests/min unauthenticated)
+Complete CRUD operations for task management
+Input validation with custom error handling
+User-specific task isolation for security
+MySQL database integration with JPA/Hibernate
 Technology Stack
 Framework: Spring Boot 3.5.6
 Security: Spring Security + JWT
