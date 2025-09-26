@@ -23,4 +23,7 @@ Server will be available at: `http://localhost:9876`
 Run these SQL commands in MySQL:
 
 
-
+CREATE DATABASE meteoros_task_db;
+CREATE USER 'meteoros_user'@'localhost' IDENTIFIED BY 'meteoros_password';
+GRANT ALL PRIVILEGES ON meteoros_task_db.* TO 'meteoros_user'@'localhost';
+FLUSH PRIVILEGES;
