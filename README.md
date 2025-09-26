@@ -227,4 +227,3 @@ Authorization: Bearer <JWT_TOKEN>
 - **Java Version:** 21
 
 ---
-Built for Meteoros Sensing Private Limited - Backend Intern Assignment
