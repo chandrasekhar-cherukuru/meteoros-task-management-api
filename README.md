@@ -133,6 +133,7 @@ Expected Response:
 "updatedAt": "2025-09-26T20:50:00"
 }
 ]
+
 API Features
 ✅ JWT Authentication with secure password hashing
 ✅ Rate Limiting (10 requests/min authenticated, 3 requests/min unauthenticated)
