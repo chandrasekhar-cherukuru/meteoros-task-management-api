@@ -27,3 +27,174 @@ CREATE DATABASE meteoros_task_db;
 CREATE USER 'meteoros_user'@'localhost' IDENTIFIED BY 'meteoros_password';
 GRANT ALL PRIVILEGES ON meteoros_task_db.* TO 'meteoros_user'@'localhost';
 FLUSH PRIVILEGES;
+
+
+text
+
+### Environment Variable Names and Sample .env Template
+
+Create a `.env` file in project root with these variables:
+
+Database Configuration
+DB_URL=jdbc:mysql://localhost:3306/meteoros_task_db
+DB_USERNAME=meteoros_user
+DB_PASSWORD=meteoros_password
+JWT Configuration
+JWT_SECRET=mySecretKey1234567890123456789012345678901234567890
+JWT_EXPIRATION=86400
+Server Configuration
+SERVER_PORT=9876
+Rate Limiting Configuration
+RATE_LIMIT_AUTHENTICATED=10
+RATE_LIMIT_UNAUTHENTICATED=3
+text
+
+## Postman Collection Requests for Each Endpoint
+
+### 1. Register User Endpoint
+POST http://localhost:9876/api/v1/auth/register
+Content-Type: application/json
+{
+"username": "john_doe",
+"email": "john@example.com",
+"password": "password123"
+}
+text
+
+**Expected Response:**
+{
+"success": true,
+"message": "User registered successfully",
+"user": {
+"id": 1,
+"username": "john_doe",
+"email": "john@example.com"
+}
+}
+text
+
+### 2. Login User Endpoint
+POST http://localhost:9876/api/v1/auth/login
+Content-Type: application/json
+{
+"username": "john_doe",
+"password": "password123"
+}
+text
+
+**Expected Response:**
+{
+"success": true,
+"message": "Login successful",
+"token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9...",
+"user": {
+"id": 1,
+"username": "john_doe",
+"email": "john@example.com"
+}
+}
+text
+
+**Note:** Copy the `token` from login response for use in the task endpoints below.
+
+### 3. Create Task Endpoint
+POST http://localhost:9876/api/v1/tasks
+Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+{
+"title": "Complete documentation",
+"description": "Write comprehensive API documentation",
+"status": "todo"
+}
+text
+
+**Expected Response:**
+{
+"id": 1,
+"title": "Complete documentation",
+"description": "Write comprehensive API documentation",
+"status": "todo",
+"createdAt": "2025-09-26T20:30:00",
+"updatedAt": "2025-09-26T20:30:00"
+}
+text
+
+### 4. Update Task Endpoint
+PUT http://localhost:9876/api/v1/tasks/1
+Authorization: Bearer <JWT_TOKEN>
+Content-Type: application/json
+{
+"title": "Complete documentation - Updated",
+"description": "Write comprehensive API documentation with examples",
+"status": "in-progress"
+}
+text
+
+**Expected Response:**
+{
+"id": 1,
+"title": "Complete documentation - Updated",
+"description": "Write comprehensive API documentation with examples",
+"status": "in-progress",
+"createdAt": "2025-09-26T20:30:00",
+"updatedAt": "2025-09-26T20:45:00"
+}
+text
+
+### 5. Delete Task Endpoint
+DELETE http://localhost:9876/api/v1/tasks/1
+Authorization: Bearer <JWT_TOKEN>
+text
+
+**Expected Response:**
+{
+"message": "Task deleted successfully!",
+"success": true
+}
+text
+
+### 6. List Tasks Endpoint
+GET http://localhost:9876/api/v1/tasks
+Authorization: Bearer <JWT_TOKEN>
+text
+
+**Expected Response:**
+[
+{
+"id": 2,
+"title": "Review code changes",
+"description": "Review pull request #123",
+"status": "todo",
+"createdAt": "2025-09-26T20:40:00",
+"updatedAt": "2025-09-26T20:40:00"
+},
+{
+"id": 3,
+"title": "Deploy to production",
+"description": "Deploy latest version to production server",
+"status": "done",
+"createdAt": "2025-09-26T20:45:00",
+"updatedAt": "2025-09-26T20:50:00"
+}
+]
+text
+
+## API Features
+- ✅ JWT Authentication with secure password hashing
+- ✅ Rate Limiting (10 requests/min authenticated, 3 requests/min unauthenticated)
+- ✅ Complete CRUD operations for task management
+- ✅ Input validation with custom error handling
+- ✅ User-specific task isolation for security
+- ✅ MySQL database integration with JPA/Hibernate
+
+## Technology Stack
+- **Framework:** Spring Boot 3.5.6
+- **Security:** Spring Security + JWT
+- **Database:** MySQL 8.0 with JPA/Hibernate
+- **Rate Limiting:** Bucket4j
+- **Validation:** Bean Validation (JSR-303)
+- **Build Tool:** Maven
+- **Java Version:** 21
+
+---
+Built for Meteoros Sensing Private Limited - Backend Intern Assignment
