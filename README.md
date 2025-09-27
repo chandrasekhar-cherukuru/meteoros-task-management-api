@@ -32,13 +32,10 @@ Server will be available at: `http://localhost:9876`
 ## Database Setup and Environment Variables
 
 ### Database Setup Commands
-Run these SQL commands in MySQL:
+Run this SQL commands in MySQL:
 
 ```sql
 CREATE DATABASE meteoros_task_db;
-CREATE USER 'meteoros_user'@'localhost' IDENTIFIED BY 'meteoros_password';
-GRANT ALL PRIVILEGES ON meteoros_task_db.* TO 'meteoros_user'@'localhost';
-FLUSH PRIVILEGES;
 ```
 
 ### Environment Variable Names and Sample .env Template
